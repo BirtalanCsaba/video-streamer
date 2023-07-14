@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.10 FATAL_ERROR)
+project(VIDEO_STREAMER C CXX)
+
+
+IF (NOT DEFINED WITH_SRT_DIR)
+SET(WITH_SRT_DIR submodule/srt)
+ENDIF()
+
+add_subdirectory(${WITH_SRT_DIR})
+
+SET(SRT_INCLUDE_DIR
+	${CMAKE_SOURCE_DIR}/${WITH_SRT_DIR}/srtcore
+	${CMAKE_BINARY_DIR}/${WITH_SRT_DIR}
+	${CMAKE_SOURCE_DIR}/${WITH_SRT_DIR}/common
+	${CMAKE_SOURCE_DIR}/${WITH_SRT_DIR}/haicrypt
+)
+
+SET(SRT_UTILS_INCLUDE_DIR
+	${CMAKE_SOURCE_DIR}/${WITH_SRT_DIR}/apps
+	${CMAKE_SOURCE_DIR}/${WITH_SRT_DIR}/testing
+)
+
+add_subdirectory(video-streamer)
